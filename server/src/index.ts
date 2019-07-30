@@ -1,5 +1,6 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
@@ -10,23 +11,32 @@ const app = express();
 // Set up DotEnv
 dotenv.config();
 
-// Check Node Environment in order to activate GRAPHQL playground
-const IS_DEV = process.env.NODE_ENV === 'development';
+// Connect to database
+(async () => {
+  await mongoose.connect('mongodb://localhost:27017/farmunity01', {
+    useNewUrlParser: true
+  });
 
-// Create GraphQL Server
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  playground: IS_DEV
-});
+  console.log('Connected to DB');
 
-// Apply GraphQL Middleware to Express App
-server.applyMiddleware({ app });
+  // Check Node Environment in order to activate GRAPHQL playground
+  const IS_DEV = process.env.NODE_ENV === 'development';
 
-// Set Port Number
-const { PORT } = process.env;
+  // Create GraphQL Server
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    playground: IS_DEV
+  });
 
-// Start GraphQL Server
-app.listen(PORT || 4000, () =>
-  console.log(`Server ready at http://localhost:${PORT}/graphql`)
-);
+  // Apply GraphQL Middleware to Express App
+  server.applyMiddleware({ app });
+
+  // Set Port Number
+  const { PORT } = process.env;
+
+  // Start GraphQL Server
+  app.listen(PORT || 4000, () =>
+    console.log(`Server ready at http://localhost:${PORT}/graphql`)
+  );
+})();
