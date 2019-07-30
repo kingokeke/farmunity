@@ -1,3 +1,6 @@
+// ROOT TYPE DEFINITION FOR GRAPHQL SCHEMA
+// NOTE: DO NOT EDIT
+
 import { gql } from 'apollo-server-express';
 
 // Define Type Schema

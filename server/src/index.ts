@@ -1,3 +1,5 @@
+// ENTRY POINT FOR THE PROJECT
+
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import mongoose from 'mongoose';

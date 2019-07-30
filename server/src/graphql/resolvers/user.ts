@@ -1,5 +1,8 @@
-import { UserType } from './../../typings/index';
+// RESOLVER FUNCTIONS FOR USER RESOURCE
+
+import { User as UserType } from './../../typings/index';
 import User from '../../models/User';
+
 // Define Resolvers
 const userResolver = {
   Mutation: {
@@ -7,8 +10,7 @@ const userResolver = {
       const newUser = new User({
         firstName: args.firstName
       });
-      const savedUser = await newUser.save();
-      const { id, firstName } = savedUser;
+      const { id, firstName } = await newUser.save();
       return { id, firstName };
     }
   }

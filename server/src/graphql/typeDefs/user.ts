@@ -1,3 +1,5 @@
+// TYPE DEFINITION SCHEMA FOR USER RESOURCE
+
 import { gql } from 'apollo-server-express';
 
 // Define Type Schema
@@ -8,7 +10,7 @@ const userTypeDefs = gql`
 
   type User {
     id: ID!
-    firstName: String
+    firstName: String!
   }
 `;
 
