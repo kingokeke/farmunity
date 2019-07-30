@@ -2,8 +2,8 @@ import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import typeDefs from './typeDefs';
-import resolvers from './resolvers';
+import typeDefs from './graphql/typeDefs';
+import resolvers from './graphql/resolvers';
 
 // Instantiate Express
 const app = express();
