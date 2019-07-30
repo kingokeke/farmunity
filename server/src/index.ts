@@ -1,6 +1,7 @@
-import { ApolloServer, gql } from "apollo-server-express";
-import express from "express";
-import dotenv from "dotenv";
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
+import dotenv from 'dotenv';
+import typeDefs from './typeDefs/index';
 
 // Instantiate Express
 const app = express();
@@ -8,24 +9,21 @@ const app = express();
 // Set up DotEnv
 dotenv.config();
 
-// Define Type Schema
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
 // Define Resolvers
 const resolvers = {
   Query: {
-    hello: () => "Hello World"
+    hello: () => 'Hello World'
   }
 };
+
+// Check Node Environment in order to activate GRAPHQL playground
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 // Create GraphQL Server
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  playground: IS_DEV
 });
 
 // Apply GraphQL Middleware to Express App
