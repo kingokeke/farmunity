@@ -11,32 +11,39 @@ const app = express();
 // Set up DotEnv
 dotenv.config();
 
-// Connect to database
 (async () => {
-  await mongoose.connect('mongodb://localhost:27017/farmunity01', {
-    useNewUrlParser: true
-  });
+  try {
+    // Get DB connection parameters from environment variables
+    const { DB_HOST, DB_PORT, DB_NAME } = process.env;
 
-  console.log('Connected to DB');
+    // Connect to database
+    await mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
+      useNewUrlParser: true
+    });
 
-  // Check Node Environment in order to activate GRAPHQL playground
-  const IS_DEV = process.env.NODE_ENV === 'development';
+    console.log('Connected to MongoDB database');
 
-  // Create GraphQL Server
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    playground: IS_DEV
-  });
+    // Check Node Environment in order to activate GRAPHQL playground
+    const IS_DEV = process.env.NODE_ENV === 'development';
 
-  // Apply GraphQL Middleware to Express App
-  server.applyMiddleware({ app });
+    // Create GraphQL Server
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      playground: IS_DEV
+    });
 
-  // Set Port Number
-  const { PORT } = process.env;
+    // Apply GraphQL Middleware to Express App
+    server.applyMiddleware({ app });
 
-  // Start GraphQL Server
-  app.listen(PORT || 4000, () =>
-    console.log(`Server ready at http://localhost:${PORT}/graphql`)
-  );
+    // Set Port Number
+    const { PORT } = process.env;
+
+    // Start GraphQL Server
+    app.listen(PORT || 4000, () =>
+      console.log(`Server ready at http://localhost:${PORT}/graphql`)
+    );
+  } catch (err) {
+    console.log(err);
+  }
 })();
