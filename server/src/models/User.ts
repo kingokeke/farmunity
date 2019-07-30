@@ -1,3 +1,4 @@
+import { User as UserType } from './../typings/index';
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
@@ -9,4 +10,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model<UserType>('User', userSchema);
