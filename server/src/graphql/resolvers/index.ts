@@ -1,3 +1,4 @@
 import hello from './hello';
+import user from './user';
 
-export default [hello];
+export default [hello, user];
