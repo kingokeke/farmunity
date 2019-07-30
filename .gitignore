@@ -132,3 +132,7 @@ server/node_modules
 client/coverage
 server/coverage
 
+# Typescript Output
+client/dist
+server/dist
+
