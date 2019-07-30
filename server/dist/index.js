@@ -5,8 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const apollo_server_express_1 = require("apollo-server-express");
 const express_1 = __importDefault(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
 // Instantiate Express
 const app = express_1.default();
+// Set up DotEnv
+dotenv_1.default.config();
 // Define Type Schema
 const typeDefs = apollo_server_express_1.gql `
   type Query {
@@ -26,6 +29,7 @@ const server = new apollo_server_express_1.ApolloServer({
 });
 // Apply GraphQL Middleware to Express App
 server.applyMiddleware({ app });
+const PORT = process.env.PORT || 4000;
 // Start GraphQL Server
-app.listen({ port: 4000 }, () => console.log(`Server ready at http://localhost:4000/graphql`));
+app.listen(PORT, () => console.log(`Server ready at http://localhost:${PORT}/graphql`));
 //# sourceMappingURL=index.js.map

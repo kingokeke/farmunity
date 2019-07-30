@@ -1,8 +1,12 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import express from "express";
+import dotenv from "dotenv";
 
 // Instantiate Express
 const app = express();
+
+// Set up DotEnv
+dotenv.config();
 
 // Define Type Schema
 const typeDefs = gql`
@@ -27,7 +31,9 @@ const server = new ApolloServer({
 // Apply GraphQL Middleware to Express App
 server.applyMiddleware({ app });
 
+const PORT = process.env.PORT || 4000;
+
 // Start GraphQL Server
-app.listen({ port: 4000 }, () =>
-  console.log(`Server ready at http://localhost:4000/graphql`)
+app.listen(PORT, () =>
+  console.log(`Server ready at http://localhost:${PORT}/graphql`)
 );
