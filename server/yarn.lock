@@ -495,6 +495,13 @@
   resolved "https://registry.npm.taobao.org/@types/graphql/download/@types/graphql-14.2.3.tgz#cfc6420a67eb20420786f90112357921974593b9"
   integrity sha1-z8ZCCmfrIEIHhvkBEjV5IZdFk7k=
 
+"@types/hapi__joi@*", "@types/hapi__joi@^15.0.3":
+  version "15.0.3"
+  resolved "https://registry.npm.taobao.org/@types/hapi__joi/download/@types/hapi__joi-15.0.3.tgz#eeeca99e3829636975bf39532d6e8279409c78f2"
+  integrity sha1-7uypnjgpY2l1vzlTLW6CeUCcePI=
+  dependencies:
+    "@types/hapi__joi" "*"
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/@types/istanbul-lib-coverage/download/@types/istanbul-lib-coverage-2.0.1.tgz#42995b446db9a48a11a07ec083499a860e9138ff"
