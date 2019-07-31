@@ -7,7 +7,15 @@ import { hash } from 'bcryptjs';
 const userSchema = new mongoose.Schema(
   {
     firstName: String,
-    password: String
+    lastName: String,
+    email: String,
+    phone: String,
+    password: String,
+    role: String,
+    streetAddress: String,
+    localGovt: String,
+    state: String,
+    profilePic: String
   },
   {
     timestamps: true
