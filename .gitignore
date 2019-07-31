@@ -136,3 +136,6 @@ server/coverage
 client/dist
 server/dist
 
+# Environment Files
+client/.env
+server/.env
