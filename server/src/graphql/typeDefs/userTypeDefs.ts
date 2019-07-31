@@ -25,7 +25,6 @@ const userTypeDefs = gql`
     lastName: String!
     email: String!
     phone: String!
-    password: String!
     role: String!
     streetAddress: String
     localGovt: String
