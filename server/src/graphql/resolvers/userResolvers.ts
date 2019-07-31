@@ -16,15 +16,44 @@ const userResolver = {
 
         const newUser = new User({
           firstName: value.firstName,
-          password: value.password
+          lastName: value.lastName,
+          email: value.email,
+          phone: value.phone,
+          password: value.password,
+          role: value.role,
+          streetAddress: value.streetAddress,
+          localGovt: value.localGovt,
+          state: value.state,
+          profilePic: value.profilePic
         });
 
-        const { id, firstName } = await newUser.save();
+        const {
+          id,
+          firstName,
+          lastName,
+          email,
+          phone,
+          role,
+          streetAddress,
+          localGovt,
+          state,
+          profilePic
+        } = await newUser.save();
 
-        return { id, firstName };
+        return {
+          id,
+          firstName,
+          lastName,
+          email,
+          phone,
+          role,
+          streetAddress,
+          localGovt,
+          state,
+          profilePic
+        };
       } catch (err) {
-        console.log(err);
-        return;
+        return err;
       }
     }
   }
