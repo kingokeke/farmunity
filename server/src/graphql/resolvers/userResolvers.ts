@@ -1,7 +1,7 @@
 // RESOLVER FUNCTIONS FOR USER RESOURCE
 
-import { User as UserType } from './../../typings/index';
-import User from '../../models/User';
+import { User as UserType } from '../../typings/index';
+import { User } from '../../models';
 
 // Define Resolvers
 const userResolver = {

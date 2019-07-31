@@ -1,6 +1,6 @@
 // USER MODEL FILE
 
-import { User as UserType } from './../typings/index';
+import { User as UserType } from '../typings/index';
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
