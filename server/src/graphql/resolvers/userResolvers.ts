@@ -14,6 +14,9 @@ const userResolver = {
           abortEarly: false
         });
 
+        const userExists = await User.exists({ email: value.email });
+        if (userExists) throw Error('Email already exists in database');
+
         const newUser = new User({
           firstName: value.firstName,
           lastName: value.lastName,
