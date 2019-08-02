@@ -24,6 +24,14 @@ const userResolver = {
         role: 'buyer',
         $or: [{ lastName: name }, { firstName: name }]
       }).exec();
+    },
+
+    getFarmersByName: async (_root: any, args: UserType) => {
+      const name = args.name && args.name[0].toUpperCase() + args.name.slice(1);
+      return await User.find({
+        role: 'farmer',
+        $or: [{ lastName: name }, { firstName: name }]
+      }).exec();
     }
   },
 

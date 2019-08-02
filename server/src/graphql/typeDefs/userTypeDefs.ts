@@ -9,6 +9,7 @@ const userTypeDefs = gql`
     getUserByID(id: ID!): User
     getUsersByRole(role: String!): [User!]!
     getBuyersByName(name: String!): [User!]!
+    getFarmersByName(name: String!): [User!]!
   }
 
   extend type Mutation {
