@@ -8,10 +8,23 @@ import { addUserSchema } from '../../validation/';
 // Define Resolvers
 const userResolver = {
   Query: {
-    getAllUsers: async () => User.find({}),
-    getUserByID: async (_root: any, args: UserType) => User.findById(args.id),
-    getUsersByRole: async (_root: any, args: UserType) =>
-      User.find({ role: args.role })
+    getAllUsers: async () => {
+      return await User.find({});
+    },
+    getUserByID: async (_root: any, args: UserType) => {
+      return await User.findById(args.id);
+    },
+
+    getUsersByRole: async (_root: any, args: UserType) => {
+      return await User.find({ role: args.role });
+    },
+    getBuyersByName: async (_root: any, args: UserType) => {
+      const name = args.name && args.name[0].toUpperCase() + args.name.slice(1);
+      return await User.find({
+        role: 'buyer',
+        $or: [{ lastName: name }, { firstName: name }]
+      }).exec();
+    }
   },
 
   Mutation: {
