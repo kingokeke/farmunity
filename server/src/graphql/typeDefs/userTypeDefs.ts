@@ -4,6 +4,10 @@ import { gql } from 'apollo-server-express';
 
 // Define Type Schema
 const userTypeDefs = gql`
+  extend type Query {
+    getAllUsers: [User!]!
+  }
+
   extend type Mutation {
     addUser(
       firstName: String!

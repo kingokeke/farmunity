@@ -7,6 +7,10 @@ import { addUserSchema } from '../../validation/';
 
 // Define Resolvers
 const userResolver = {
+  Query: {
+    getAllUsers: async () => User.find({})
+  },
+
   Mutation: {
     addUser: async (_root: any, args: UserType) => {
       try {
