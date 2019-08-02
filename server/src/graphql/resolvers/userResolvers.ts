@@ -18,6 +18,14 @@ const userResolver = {
     getUsersByRole: async (_root: any, args: UserType) => {
       return await User.find({ role: args.role });
     },
+
+    getUsersByName: async (_root: any, args: UserType) => {
+      const nameRegex = new RegExp('.*' + args.name + '.*', 'ig');
+      return await User.find({
+        $or: [{ lastName: nameRegex }, { firstName: nameRegex }]
+      }).exec();
+    },
+
     getBuyersByName: async (_root: any, args: UserType) => {
       const nameRegex = new RegExp('.*' + args.name + '.*', 'ig');
       return await User.find({

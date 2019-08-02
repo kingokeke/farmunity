@@ -7,6 +7,7 @@ const userTypeDefs = gql`
   extend type Query {
     getAllUsers: [User!]!
     getUserByID(id: ID!): User
+    getUsersByName(name: String!): [User!]!
     getUsersByRole(role: String!): [User!]!
     getBuyersByName(name: String!): [User!]!
     getFarmersByName(name: String!): [User!]!
