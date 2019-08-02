@@ -110,8 +110,15 @@ const userResolver = {
         });
         return updatedUser;
       } catch (error) {
-        console.log(error);
-        return `Error message: ${error}`;
+        return;
+      }
+    },
+
+    deleteUser: async (_root: any, args: any) => {
+      try {
+        return await User.findByIdAndDelete(args.id);
+      } catch (error) {
+        return error;
       }
     }
   }

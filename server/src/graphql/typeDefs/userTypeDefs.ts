@@ -39,6 +39,8 @@ const userTypeDefs = gql`
       state: String
       profilePic: String
     ): User
+
+    deleteUser(id: ID!): User
   }
 
   type User {
@@ -48,10 +50,10 @@ const userTypeDefs = gql`
     email: String!
     phone: String!
     role: String!
-    streetAddress: String
-    localGovt: String
-    state: String
-    profilePic: String
+    streetAddress: String!
+    localGovt: String!
+    state: String!
+    profilePic: String!
   }
 `;
 
