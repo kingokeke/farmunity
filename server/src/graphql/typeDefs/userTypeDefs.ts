@@ -6,6 +6,7 @@ import { gql } from 'apollo-server-express';
 const userTypeDefs = gql`
   extend type Query {
     getAllUsers: [User!]!
+    getUserByID(id: ID!): User
   }
 
   extend type Mutation {
