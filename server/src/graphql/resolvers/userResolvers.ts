@@ -19,10 +19,10 @@ const userResolver = {
       return await User.find({ role: args.role });
     },
     getBuyersByName: async (_root: any, args: UserType) => {
-      const name = args.name && args.name[0].toUpperCase() + args.name.slice(1);
+      const nameRegex = new RegExp('.*' + args.name + '.*', 'ig');
       return await User.find({
         role: 'buyer',
-        $or: [{ lastName: name }, { firstName: name }]
+        $or: [{ lastName: nameRegex }, { firstName: nameRegex }]
       }).exec();
     },
 
