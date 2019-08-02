@@ -3,7 +3,7 @@
 import { User as UserType } from '../../typings/index';
 import Joi from '@hapi/joi';
 import { User } from '../../models';
-import { addUserSchema } from '../../validation/';
+import { addUserSchema, updateUserSchema } from '../../validation/';
 
 // Define Resolvers
 const userResolver = {
@@ -93,6 +93,25 @@ const userResolver = {
         };
       } catch (err) {
         return err;
+      }
+    },
+
+    updateUser: async (_root: any, args: any) => {
+      try {
+        const updateDetails: UserType = { ...args };
+        delete updateDetails.id;
+
+        const value = await Joi.validate(updateDetails, updateUserSchema, {
+          abortEarly: false
+        });
+
+        const updatedUser = await User.findByIdAndUpdate(args.id, value, {
+          new: true
+        });
+        return updatedUser;
+      } catch (error) {
+        console.log(error);
+        return `Error message: ${error}`;
       }
     }
   }

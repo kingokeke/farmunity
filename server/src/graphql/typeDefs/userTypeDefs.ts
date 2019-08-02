@@ -26,6 +26,19 @@ const userTypeDefs = gql`
       state: String
       profilePic: String
     ): User
+
+    updateUser(
+      id: ID!
+      firstName: String
+      lastName: String
+      email: String
+      phone: String
+      password: String
+      streetAddress: String
+      localGovt: String
+      state: String
+      profilePic: String
+    ): User
   }
 
   type User {
