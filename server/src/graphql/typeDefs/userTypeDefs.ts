@@ -7,6 +7,7 @@ const userTypeDefs = gql`
   extend type Query {
     getAllUsers: [User!]!
     getUserByID(id: ID!): User
+    getUsersByRole(role: String!): [User!]!
   }
 
   extend type Mutation {

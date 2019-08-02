@@ -9,7 +9,9 @@ import { addUserSchema } from '../../validation/';
 const userResolver = {
   Query: {
     getAllUsers: async () => User.find({}),
-    getUserByID: async (_root: any, args: UserType) => User.findById(args.id)
+    getUserByID: async (_root: any, args: UserType) => User.findById(args.id),
+    getUsersByRole: async (_root: any, args: UserType) =>
+      User.find({ role: args.role })
   },
 
   Mutation: {
