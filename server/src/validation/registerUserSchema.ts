@@ -62,5 +62,10 @@ export default Joi.object().keys({
           }
         }
       }
-    })
+    }),
+
+  confirmPassword: Joi.string()
+    .required()
+    .label('Confirm Password')
+    .min(8)
 });
