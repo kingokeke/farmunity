@@ -139,3 +139,6 @@ server/dist
 # Environment Files
 client/.env
 server/.env
+
+# HTML Raw Files
+html
