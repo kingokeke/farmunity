@@ -1,9 +1,16 @@
 // RESOLVER FUNCTIONS FOR USER RESOURCE
 
 import { User as UserType } from '../../typings/index';
+import { Login as LoginTypes } from './../../typings/index';
 import Joi from '@hapi/joi';
+import bcrypt from 'bcryptjs';
 import { User } from '../../models';
-import { addUserSchema, updateUserSchema } from '../../validation/';
+import jwt from 'jsonwebtoken';
+import {
+  registerUserSchema,
+  loginUserSchema,
+  updateUserSchema
+} from '../../validation/';
 
 // Define Resolvers
 const userResolver = {
@@ -44,11 +51,14 @@ const userResolver = {
   },
 
   Mutation: {
-    addUser: async (_root: any, args: UserType) => {
+    registerUser: async (_root: any, args: UserType) => {
       try {
-        const value = await Joi.validate(args, addUserSchema, {
+        const value = await Joi.validate(args, registerUserSchema, {
           abortEarly: false
         });
+
+        if (value.password !== value.confirmPassword)
+          throw Error('Passwords do not match');
 
         const userExists = await User.exists({ email: value.email });
         if (userExists) throw Error('Email already exists in database');
@@ -93,6 +103,37 @@ const userResolver = {
         };
       } catch (err) {
         return err;
+      }
+    },
+
+    loginUser: async (_root: any, args: LoginTypes) => {
+      try {
+        const value = await Joi.validate(args, loginUserSchema, {
+          abortEarly: false
+        });
+
+        const user = await User.findOne({ email: value.email });
+        if (!user) throw new Error('No user with that email');
+
+        const isPasswordValid = await bcrypt.compare(
+          value.password,
+          user.password
+        );
+
+        if (!isPasswordValid) throw new Error('Password not correct');
+
+        // FIXME: Write a typescript generic for the JWT secret used below
+        const token = jwt.sign(
+          { id: user.id, email: user.email },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: '365d'
+          }
+        );
+
+        return token;
+      } catch (error) {
+        return error;
       }
     },
 
