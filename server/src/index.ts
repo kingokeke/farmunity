@@ -13,6 +13,9 @@ const app = express();
 // Set up DotEnv
 dotenv.config();
 
+// Get JWT secret from env file
+const { JWT_SECRET } = process.env;
+
 (async () => {
   try {
     // Get DB connection parameters from environment variables
@@ -32,6 +35,9 @@ dotenv.config();
     const server = new ApolloServer({
       typeDefs,
       resolvers,
+      context: () => {
+        JWT_SECRET;
+      },
       playground: IS_DEV
     });
 
